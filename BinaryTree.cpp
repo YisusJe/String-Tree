@@ -12,7 +12,6 @@ BinaryTree<T>::BinaryTree(const BinaryTree &bt) {
     } else {
         root = NULL;
     }
-
 };
 
 template< typename T>
@@ -70,6 +69,11 @@ int BinaryTree<T>::treeHeight() const {
     treeHeight(root);
 };
 
+template< typename T>
+void BinaryTree<T>::sheets() const {
+	sheets(root); 
+}
+
 
 template< typename T>
 typename BinaryTree<T>::BinaryNode*  BinaryTree<T>::clone(const BinaryNode *r) {
@@ -102,12 +106,11 @@ void BinaryTree<T>::remove(const T &theElement, BinaryNode * &t ) {
         } else if ( numberOfWords(theElement) > numberOfWords(t->element)) {
             remove (t->rightNode);
         } else if  (NULL != numberOfWords(t->leftNode) && NULL != numberOfWords(t->rightNode) ) {  //???????????
-
              t->element = findMin(numberOfWords(t->rightNode))->element;
             remove(t->element, t->rightNode);
         } else {
             BinaryNode * oldNode = t;
-            t = ( NULL!= t->leftNode) ? t->leftNode : t->rightNode;
+            t = ( NULL != t->leftNode) ? t->leftNode : t->rightNode;
             delete oldNode;
         }
     }
@@ -145,7 +148,6 @@ typename BinaryTree<T>::BinaryNode * BinaryTree<T>::findMin(BinaryNode *bNode) c
             bNode = bNode->leftNode;
         }
     }
-
     return bNode;
 }
 
@@ -172,16 +174,15 @@ void BinaryTree<T>::preOrder( BinaryNode *bNode ) const {
 
 template< typename T>
 void BinaryTree<T>::inOrder( BinaryNode *bNode ) const {
-    if( NULL != bNode ) {
+ 
         inOrder(bNode->leftNode);
         std::cout << bNode->element << " " ;
         inOrder(bNode->rightNode);
-    }
+
 };
 
 template< typename T>
-void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {
-	
+void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {	
 	if( NULL != bNode ) {
         postOrder(bNode->leftNode);
     	postOrder(bNode->rightNode);
@@ -189,20 +190,28 @@ void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {
     }  
 };
 
-// Find height of a tree, defined by the root node
 template< typename T>
 int BinaryTree<T>::treeHeight(BinaryNode *bNode) const {
     if (bNode == NULL) 
         return 0;
     else {
-        // Find the height of left, right subtrees
         int left_height = treeHeight(bNode->leftNode);
         int right_height = treeHeight(bNode->rightNode);
           
-        // Find max(subtree_height) + 1 to get the height of the tree
         if (left_height >= right_height)
             return left_height + 1;
         else
             return right_height + 1;
 	}
+}
+
+template< typename T>
+void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
+	if( NULL != bNode ) {
+		sheets(bNode->leftNode);
+		sheets(bNode->rightNode);
+       	if( bNode->leftNode == NULL && bNode->rightNode == NULL){
+       		std::cout << bNode->element << " " ;
+		}
+    } 
 }

@@ -18,5 +18,14 @@ int main() {
     bTree.postOrder();
     int height = bTree.treeHeight();
     cout<<"height: "<<height<<endl;
+    
+    for(int i = 1 ; i < aux.size() ; i++ )
+	{
+		bTree.insert(aux[i].c_str());
+	}
+	bTree.postOrder();
+	
+	cout << "" << endl;
+    bTree.sheets();
     return 0;
 }

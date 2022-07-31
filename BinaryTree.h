@@ -7,9 +7,8 @@ template< typename T = const char*>
 class BinaryTree  {
 public:
     BinaryTree () =  default;
-    BinaryTree ( const BinaryTree &bt);
-    BinaryTree ( const T &theElement);
-
+    BinaryTree ( const BinaryTree &bt );
+    BinaryTree ( const T &theElement );
     ~BinaryTree();
 
     void insert ( const T &theElement );
@@ -19,14 +18,17 @@ public:
     void preOrder () const;
     void inOrder () const;
     void postOrder () const;
+    void sheets () const;
     int numberOfWords(const char* word)  {
+    	
     	std::vector<int> numbers;
     	int sum = 0;
     	std::string wordAux = word;
+    	
     	for(int i = 0; i < wordAux.size() ; i++){
-        numbers.push_back((int)word[i]);
-        sum += numbers[i];
-    } 
+        	numbers.push_back((int)word[i]);
+        	sum += numbers[i];
+    	} 
 		return sum;  
 	}
 	int treeHeight () const; 
@@ -62,8 +64,8 @@ private:
     BinaryNode * findMax (BinaryNode *bNode) const;
     void preOrder ( BinaryNode *bNode ) const;
     void inOrder ( BinaryNode *bNode ) const;
-    void postOrder (BinaryNode *bNode ) const;
     int treeHeight (BinaryNode *bNode) const; 
+    void sheets ( BinaryNode *bNode  ) const;
 };
 
 
