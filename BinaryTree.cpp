@@ -1,5 +1,9 @@
 #include <iostream>
+#include <vector>
 #include "BinaryTree.h"
+
+
+
 
 template< typename T>
 BinaryTree<T>::BinaryTree(const BinaryTree &bt) {
@@ -14,9 +18,9 @@ BinaryTree<T>::BinaryTree(const BinaryTree &bt) {
 template< typename T>
 BinaryTree<T>::BinaryTree(const T &theElement) {
     root = new BinaryNode(theElement);
-    /*root->element = theElement;
-    root->leftNode = nullptr;
-    root->rightNode = nullptr;*/
+    root->element = theElement;
+    root->leftNode = NULL;
+    root->rightNode = NULL;
 }
 
 template< typename T>
@@ -69,17 +73,15 @@ typename BinaryTree<T>::BinaryNode*  BinaryTree<T>::clone(const BinaryNode *r) {
     } else {
         return  new BinaryNode(r->element, clone(r->leftNode), clone(r->rightNode));
     }
-
-
 }
 
 template< typename T>
 void BinaryTree<T>::insert(const T &theElement, BinaryNode * &t ) {
     if ( NULL == t ){
         t = new BinaryNode (theElement);
-    } else if ( theElement < t->element ) {
+    } else if ( numberOfWords(theElement) < numberOfWords(t->element) ) {
           insert( theElement, t->leftNode );
-    } else if ( theElement > t->element ) {
+    } else if ( numberOfWords(theElement) > numberOfWords(t->element) ) {
           insert ( theElement, t->rightNode );
     } else {//???????????
     }
@@ -90,13 +92,13 @@ void BinaryTree<T>::remove(const T &theElement, BinaryNode * &t ) {
     if( NULL == t ) {
         return;
     } else {
-        if ( theElement < t->element) {
+        if ( numberOfWords(theElement) < numberOfWords(t->element)) {
             remove(t->leftNode);
-        } else if ( theElement > t->element ) {
+        } else if ( numberOfWords(theElement) > numberOfWords(t->element)) {
             remove (t->rightNode);
-        } else if  (NULL != t->leftNode && NULL != t->rightNode ) {  //???????????
+        } else if  (NULL != numberOfWords(t->leftNode) && NULL != numberOfWords(t->rightNode) ) {  //???????????
 
-             t->element = findMin(t->rightNode)->element;
+             t->element = findMin(numberOfWords(t->rightNode))->element;
             remove(t->element, t->rightNode);
         } else {
             BinaryNode * oldNode = t;
@@ -174,7 +176,10 @@ void BinaryTree<T>::inOrder( BinaryNode *bNode ) const {
 
 template< typename T>
 void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {
-    postOrder(bNode->leftNode);
-    postOrder(bNode->rightNode);
-    std::cout << bNode->element << " " ;
+	
+	if( NULL != bNode ) {
+        postOrder(bNode->leftNode);
+    	postOrder(bNode->rightNode);
+    	std::cout << bNode->element << " " ;
+    }  
 };
