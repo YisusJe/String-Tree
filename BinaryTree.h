@@ -2,10 +2,11 @@
 #define BINARYTREE_BINARYTREE_H_H
 
 #include <iostream>
-template< typename T = const char* >
+#include <vector>
+template< typename T = const char*>
 class BinaryTree  {
 public:
-    BinaryTree ()  = default;
+    BinaryTree () =  default;
     BinaryTree ( const BinaryTree &bt);
     BinaryTree ( const T &theElement);
 
@@ -18,6 +19,18 @@ public:
     void preOrder () const;
     void inOrder () const;
     void postOrder () const;
+    int numberOfWords(const char* word)  {
+    	std::vector<int> numbers;
+    	int sum = 0;
+    	std::string wordAux = word;
+    	for(int i = 0; i < wordAux.size() ; i++){
+        numbers.push_back((int)word[i]);
+        sum += numbers[i];
+    } 
+		return sum;  
+	}
+
+    
 
 
 private:
@@ -49,7 +62,6 @@ private:
     void preOrder ( BinaryNode *bNode ) const;
     void inOrder ( BinaryNode *bNode ) const;
     void postOrder (BinaryNode *bNode ) const;
-
 };
 
 
