@@ -65,6 +65,11 @@ void BinaryTree<T>::postOrder() const {
     postOrder(root);
 };
 
+template< typename T>
+int BinaryTree<T>::treeHeight() const {
+    treeHeight(root);
+};
+
 
 template< typename T>
 typename BinaryTree<T>::BinaryNode*  BinaryTree<T>::clone(const BinaryNode *r) {
@@ -183,3 +188,21 @@ void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {
     	std::cout << bNode->element << " " ;
     }  
 };
+
+// Find height of a tree, defined by the root node
+template< typename T>
+int BinaryTree<T>::treeHeight(BinaryNode *bNode) const {
+    if (bNode == NULL) 
+        return 0;
+    else {
+        // Find the height of left, right subtrees
+        int left_height = treeHeight(bNode->leftNode);
+        int right_height = treeHeight(bNode->rightNode);
+          
+        // Find max(subtree_height) + 1 to get the height of the tree
+        if (left_height >= right_height)
+            return left_height + 1;
+        else
+            return right_height + 1;
+	}
+}

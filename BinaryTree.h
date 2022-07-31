@@ -29,6 +29,7 @@ public:
     } 
 		return sum;  
 	}
+	int treeHeight () const; 
 
     
 
@@ -62,6 +63,7 @@ private:
     void preOrder ( BinaryNode *bNode ) const;
     void inOrder ( BinaryNode *bNode ) const;
     void postOrder (BinaryNode *bNode ) const;
+    int treeHeight (BinaryNode *bNode) const; 
 };
 
 

@@ -16,5 +16,7 @@ int main() {
     bTree.insert("hilo");
     bTree.insert("casa");
     bTree.postOrder();
+    int height = bTree.treeHeight();
+    cout<<"height: "<<height<<endl;
     return 0;
 }
