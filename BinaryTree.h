@@ -31,6 +31,7 @@ public:
     	} 
 		return sum;  
 	}
+	int treeHeight () const; 
 
     
 
@@ -63,7 +64,7 @@ private:
     BinaryNode * findMax (BinaryNode *bNode) const;
     void preOrder ( BinaryNode *bNode ) const;
     void inOrder ( BinaryNode *bNode ) const;
-    void postOrder ( BinaryNode *bNode ) const;
+    int treeHeight (BinaryNode *bNode) const; 
     void sheets ( BinaryNode *bNode  ) const;
 };
 

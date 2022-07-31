@@ -65,6 +65,11 @@ void BinaryTree<T>::postOrder() const {
 };
 
 template< typename T>
+int BinaryTree<T>::treeHeight() const {
+    treeHeight(root);
+};
+
+template< typename T>
 void BinaryTree<T>::sheets() const {
 	sheets(root); 
 }
@@ -184,6 +189,21 @@ void BinaryTree<T>::postOrder( BinaryNode *bNode ) const {
     	std::cout << bNode->element << " " ;
     }  
 };
+
+template< typename T>
+int BinaryTree<T>::treeHeight(BinaryNode *bNode) const {
+    if (bNode == NULL) 
+        return 0;
+    else {
+        int left_height = treeHeight(bNode->leftNode);
+        int right_height = treeHeight(bNode->rightNode);
+          
+        if (left_height >= right_height)
+            return left_height + 1;
+        else
+            return right_height + 1;
+	}
+}
 
 template< typename T>
 void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
