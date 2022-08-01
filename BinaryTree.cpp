@@ -2,10 +2,8 @@
 #include <vector>
 #include "BinaryTree.h"
 
-
-
-
 template< typename T>
+// Constructores
 BinaryTree<T>::BinaryTree(const BinaryTree &bt) {
     if( NULL != bt.root ) {
         this->root = clone(bt.root);
@@ -13,6 +11,7 @@ BinaryTree<T>::BinaryTree(const BinaryTree &bt) {
         root = NULL;
     }
 };
+
 
 template< typename T>
 BinaryTree<T>::BinaryTree(const T &theElement) {
@@ -22,61 +21,77 @@ BinaryTree<T>::BinaryTree(const T &theElement) {
     root->rightNode = NULL;
 }
 
+// Desctructor
 template< typename T>
 BinaryTree<T>::~BinaryTree() {
     makeEmpty();
     /* root->~BinaryNode();*/
 };
 
+
+// Funcion encargada de insertar los elementos
 template< typename T>
 void BinaryTree<T>::insert(const T &theElement) {
     insert(theElement, root );
 };
 
+
+// Funcion encargada de remover los elementos
 template< typename T>
 void BinaryTree<T>::remove(const T &theElement) {
     remove(theElement,root);
 };
 
+// Funcion se usa en el destructor
 template< typename T>
 void BinaryTree<T>::makeEmpty() {
     makeEmpty(root);
 };
 
+// isFind retorna si el elemento existe en el arbol
 template< typename T>
 bool BinaryTree<T>::isFind(const T &theElement) const {
     isFind(theElement,root);
 };
 
+
+// Recorrido de preOrder 
 template< typename T>
 void BinaryTree<T>::preOrder() const {
     preOrder(root);
 };
 
+// Recorrido de inOrder 
 template< typename T>
 void BinaryTree<T>::inOrder() const {
      inOrder(root);
 };
 
 
+// Recorrido de postOrder
 template< typename T>
 void BinaryTree<T>::postOrder() const {
     postOrder(root);
 };
 
+// treeHeight nos retorna la altura del Arbol
 template< typename T>
 int BinaryTree<T>::treeHeight() const {
     treeHeight(root);
 };
 
+// sheets se usa para contar las hojas 
 template< typename T>
 void BinaryTree<T>::sheets() const {
 	sheets(root); 
 }
+// isBalanced se usa para revisar si esta balanceado o no el Arbol
 template< typename T>
 bool BinaryTree<T>::isBalanced() const {
 	isBalanced(root);
 };
+
+// funcion para mostrar el Arbol
 template< typename T>
 void BinaryTree<T>::showTree() const {
 	showTree(root, 0); 
@@ -91,6 +106,7 @@ typename BinaryTree<T>::BinaryNode*  BinaryTree<T>::clone(const BinaryNode *r) {
     }
 }
 
+// Funcion encargada de insertar los elementos
 template< typename T>
 void BinaryTree<T>::insert(const T &theElement, BinaryNode * &t ) {
     if ( NULL == t ){
@@ -99,10 +115,11 @@ void BinaryTree<T>::insert(const T &theElement, BinaryNode * &t ) {
           insert( theElement, t->leftNode );
     } else if ( numberOfWords(theElement) > numberOfWords(t->element) ) {
           insert ( theElement, t->rightNode );
-    } else {//???????????
+    } else {
     }
 };
 
+// Funcion encargada de remover los elementos
 template< typename T>
 void BinaryTree<T>::remove(const T &theElement, BinaryNode * &t ) {
     if( NULL == t ) {
@@ -133,6 +150,7 @@ void BinaryTree<T>::makeEmpty( BinaryNode * &t ) {
     t = NULL;
 };
 
+// isFind retorna si el elemento existe en el arbol
 template< typename T>
 bool BinaryTree<T>::isFind(const T &theElement, BinaryNode * t ) const {
     if ( NULL == t ){
@@ -141,7 +159,7 @@ bool BinaryTree<T>::isFind(const T &theElement, BinaryNode * t ) const {
         return isFind( theElement, t->leftNode );
     } else if ( theElement > t->element ) {
          return isFind ( theElement, t->rightNode );
-    } else { //??
+    } else {
         return true;
     }
 };
@@ -211,6 +229,7 @@ int BinaryTree<T>::treeHeight(BinaryNode *bNode) const {
 	}
 }
 
+// sheets se usa para contar las hojas 
 template< typename T>
 void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
 	if( NULL != bNode ) {
@@ -224,39 +243,44 @@ void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
 template< typename T>
 int BinaryTree<T>::height( BinaryNode *bNode ) const{
 	if (bNode == NULL) {
-        // Empty tree is always balanced
+        // Vacio siempre balanceado
         return 0;
     }
-    // Find the left height
+    // Buscar la altura de left
     int lh = height(bNode->leftNode);
     if (lh == -1) {
-        // Left subtree is unbalanced
+        // left esta desvalanceado
         return -1;
     }
-    // Find the right height
+    // Buscar la Altura de right
     int rh = height(bNode->rightNode);
     if (rh == -1) {
-        // Right subtree is unbalanced
+        // SubArbol No balanceado
         return -1;
     }
     if (abs(lh - rh) <= 1) {
-        // Balanced tree, return the height
+        // Arbol Balanceado retorna la Altura
         return 1 + std::max(height(bNode->leftNode), height(bNode->rightNode));
     }
-    // Unbalanced tree
+    // no Balanceado
     return -1;
 }
+
+// isBalanced se usa para revisar si esta balanceado o no el Arbol
 template< typename T>
 bool BinaryTree<T>::isBalanced( BinaryNode *bNode  ) const {
-	 // Call the modified height function
+	 // llamo a la funcion height
     int h = height(root);
     if (h == -1) {
-        // Unbalanced tree
+        // no balanceado
         return false;
     }
-    // Balanced tree
+    // Balanced verdadero
     return true;
 }
+
+
+// funcion para mostrar el Arbol
 template< typename T>
 void BinaryTree<T>::showTree( BinaryNode *bNode, int cont  ) const {
 	if(bNode == NULL){
