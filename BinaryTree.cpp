@@ -74,6 +74,10 @@ void BinaryTree<T>::sheets() const {
 	sheets(root); 
 }
 
+template< typename T>
+void BinaryTree<T>::showTree() const {
+	showTree(root, 0); 
+}
 
 template< typename T>
 typename BinaryTree<T>::BinaryNode*  BinaryTree<T>::clone(const BinaryNode *r) {
@@ -214,4 +218,18 @@ void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
        		std::cout << bNode->element << " " ;
 		}
     } 
+}
+
+template< typename T>
+void BinaryTree<T>::showTree( BinaryNode *bNode, int cont  ) const {
+	if(bNode == NULL){
+		return;
+	} else {
+		showTree(bNode->leftNode, cont + 1);
+		std::cout<<bNode->element<<std::endl;
+		for(int i=0; i<cont; i++){
+			std::cout<<"    ";
+		}
+		showTree(bNode->rightNode, cont + 1);
+	}
 }

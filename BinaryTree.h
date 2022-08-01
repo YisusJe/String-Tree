@@ -19,6 +19,8 @@ public:
     void inOrder () const;
     void postOrder () const;
     void sheets () const;
+    int treeHeight () const; 
+	void showTree () const;
     int numberOfWords(const char* word)  {
     	
     	std::vector<int> numbers;
@@ -31,8 +33,6 @@ public:
     	} 
 		return sum;  
 	}
-	int treeHeight () const; 
-
     
 
 
@@ -67,6 +67,7 @@ private:
     void postOrder ( BinaryNode *bNode) const;
     int treeHeight (BinaryNode *bNode) const; 
     void sheets ( BinaryNode *bNode  ) const;
+    void showTree (BinaryNode *bNode, int cont) const;
 };
 
 
