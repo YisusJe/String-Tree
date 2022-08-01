@@ -21,7 +21,7 @@ public:
     int numberOfWords(const char* word);
 };
 
-vector<string> Files::read()
+vector<string>Files::read()
 {
     ifstream file;
     vector<string> words;
