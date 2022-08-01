@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 template< typename T = const char*>
 class BinaryTree  {
 public:
@@ -20,6 +21,7 @@ public:
     void postOrder () const;
     void sheets () const;
     int treeHeight () const; 
+    bool isBalanced() const;
 	void showTree () const;
     int numberOfWords(const char* word)  {
     	
@@ -67,6 +69,8 @@ private:
     void postOrder ( BinaryNode *bNode) const;
     int treeHeight (BinaryNode *bNode) const; 
     void sheets ( BinaryNode *bNode  ) const;
+    int height( BinaryNode *bNode ) const;
+    bool isBalanced( BinaryNode *bNode ) const;
     void showTree (BinaryNode *bNode, int cont) const;
 };
 

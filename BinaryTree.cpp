@@ -73,7 +73,10 @@ template< typename T>
 void BinaryTree<T>::sheets() const {
 	sheets(root); 
 }
-
+template< typename T>
+bool BinaryTree<T>::isBalanced() const {
+	isBalanced(root);
+};
 template< typename T>
 void BinaryTree<T>::showTree() const {
 	showTree(root, 0); 
@@ -125,7 +128,6 @@ void BinaryTree<T>::makeEmpty( BinaryNode * &t ) {
     if ( NULL !=t ) {
         makeEmpty(t->leftNode);
         makeEmpty(t->rightNode);
-        std::cout << "delete: " << t->element << std::endl;
         delete t;
     }
     t = NULL;
@@ -219,7 +221,42 @@ void BinaryTree<T>::sheets( BinaryNode *bNode  ) const {
 		}
     } 
 }
-
+template< typename T>
+int BinaryTree<T>::height( BinaryNode *bNode ) const{
+	if (bNode == NULL) {
+        // Empty tree is always balanced
+        return 0;
+    }
+    // Find the left height
+    int lh = height(bNode->leftNode);
+    if (lh == -1) {
+        // Left subtree is unbalanced
+        return -1;
+    }
+    // Find the right height
+    int rh = height(bNode->rightNode);
+    if (rh == -1) {
+        // Right subtree is unbalanced
+        return -1;
+    }
+    if (abs(lh - rh) <= 1) {
+        // Balanced tree, return the height
+        return 1 + std::max(height(bNode->leftNode), height(bNode->rightNode));
+    }
+    // Unbalanced tree
+    return -1;
+}
+template< typename T>
+bool BinaryTree<T>::isBalanced( BinaryNode *bNode  ) const {
+	 // Call the modified height function
+    int h = height(root);
+    if (h == -1) {
+        // Unbalanced tree
+        return false;
+    }
+    // Balanced tree
+    return true;
+}
 template< typename T>
 void BinaryTree<T>::showTree( BinaryNode *bNode, int cont  ) const {
 	if(bNode == NULL){
